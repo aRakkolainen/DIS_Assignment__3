@@ -1,6 +1,8 @@
+Project name: Simple Yarn Shop Application
+
 Description:
 This repository includes the source code for assignment 3 in the course Data-Intensive Systems and this will eventually include a short video where I demonstrate the app.
-This assignment is about a simple Yarn E-shopping platform because it relates to my hobbies. 
+This assignment is about a simple platform for shopping yarn and other knitting related products online and the products are fetched from three imaginery databases located in Finland, UK and Italy.
 
 How to use: 
 Instructions will be provided later
