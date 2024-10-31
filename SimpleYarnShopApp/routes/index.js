@@ -1,4 +1,5 @@
 var express = require('express');
+const pgp = require('pg-promise');
 var router = express.Router();
 
 // All database connections: 
@@ -16,7 +17,7 @@ router.get('/', function(req, res, next) {
 router.get('/', async (req, res) => {
   try {
     console.log("HELLO!!!")
-    const result = await finlandDB.query('SELECT * FROM Product');
+    const result = await finlandDB.query('SELECT * FROM Yarn');
     console.log(result);
     res.json(result.rows);
   } catch(err) {
@@ -27,13 +28,30 @@ router.get('/', async (req, res) => {
 
 router.get('/finnishProducts', async (req, res) => {
   console.log("Fetching products from Finland..")
-  let query = "SELECT * FROM product";
+  let queries = {
+    yarnQuery: "SELECT * FROM \"Yarn\"",
+    knittingNeedleQuery: 'SELECT * FROM \"KnittingNeedle\"',
+    patternQuery: 'SELECT * FROM \"Pattern\"',
+    crochetHookQuery: 'SELECT * FROM \"CrochetHook\"'
+  };
+  
+  console.log(queries.yarnQuery)
   let response = {};
   try {
-    let result = await finlandDB.query(query);
+    let yarnResult = await finlandDB.query(queries.yarnQuery);
+    let needleResult = await finlandDB.query(queries.knittingNeedleQuery);
+    let patternResult = await finlandDB.query(queries.patternQuery);
+    let hookResult = await finlandDB.query(queries.crochetHookQuery);
+    
+
     response = {
-      'products': result.rows
-    };
+      yarns: yarnResult.rows,
+      needles: needleResult.rows, 
+      patterns: patternResult.rows, 
+      hooks: hookResult.rows
+    }
+
+    console.log(response)
 
   } catch(error) {
     response = {
@@ -41,7 +59,6 @@ router.get('/finnishProducts', async (req, res) => {
       'errorMsg': error
     }
   }
-
 res.json(response);
   
 })

@@ -5,19 +5,63 @@ let finnishProducts = [];
 let britishProducts = [];
 let italianProducts = [];
 let productsView = document.getElementById("productsView");
-let productsElementList = document.getElementById("products");
+let yarnsTable = document.getElementById("yarns");
+let yarnsNotUpdated = true;
+
 
 //MVP version (This prints the data from db once, but maybe it needs to be dynamic so it would be more useful..)
 finlandBtn.addEventListener("click", async () => {
     console.log("Loading product catalog for Finland..");
     let url = "http://localhost:3001/finnishProducts";
-    if (finnishProducts.length == 0) {
+
+    let result = await fetch(url);
+
+    let productCatalog = await result.json(); 
+
+    let yarns = productCatalog.yarns; 
+    let patterns = productCatalog.patterns; 
+    let needles = productCatalog.needles; 
+    let hooks = productCatalog.hooks; 
+    console.log(yarns)
+    let title = document.createElement("th");
+    yarnsTable.appendChild(title);    
+
+
+
+    if (yarnsNotUpdated) {
+        for (let i=0; i < yarns.length; i++) {
+            let row = document.createElement("tr");
+            let name = document.createElement("td");
+            let color = document.createElement("td");
+            let material = document.createElement("td");
+            let weight = document.createElement("td");
+            name.innerText = yarns[i].name;
+            color.innerText = yarns[i].colour; 
+            material.innerText = yarns[i].material; 
+            weight.innerText = yarns[i].weight; 
+
+            row.appendChild(name); 
+            row.appendChild(color);
+            row.appendChild(material);
+            row.appendChild(weight);
+            yarnsTable.appendChild(row);
+        }
+    }
+    yarnsNotUpdated = false;
+    /*yarns.array.forEach(element => {
+        let row = document.createElement("tr");
+        console.log(element)
+        row.innerText = element;
+        productTable.appendChild(row);
+    });*/
+
+    /*if (finnishProducts.length == 0) {
         let result = await fetch(url);
         let tempProducts = await result.json();
         finnishProducts = tempProducts.products;
         console.log(finnishProducts);
-        addProductToTheView(finnishProducts);
-    }
+        //addProductToTheView(finnishProducts);
+    }*/
     //Showing in the view 
     // if (finnishProducts.length == 0) {
     //     productsView.innerText = "No results";
@@ -44,7 +88,7 @@ italyBtn.addEventListener("click", async () => {
 });
 
 
-function addProductToTheView(products) {
+/* function addProductToTheView(products) {
     //Clearing the list before adding new ones
     clearProductsView();
     products.forEach(element => {
@@ -73,4 +117,4 @@ function clearProductsView(){
     productsElementList.forEach(element => {
         productsView.removeChild(document.getElementById(element.id));
     })
-}
+}*/

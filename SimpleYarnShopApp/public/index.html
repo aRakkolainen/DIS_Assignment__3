@@ -5,20 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Yarn Shop</title>
     <script type="module" src="./javascripts/view.js" defer></script>
-    <style src="./stylesheets/style.css"></style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
 </head>
 <body>
     <h1>Welcome to Simple Yarn Shop</h1>
     <p>Choose your location: </p>
-    <button id="finlandBtn">Finland</button>
-    <button id="ukBtn">UK</button>
-    <button id="italyBtn">Italy</button>
+    <button id="finlandBtn" class="wawes-effect wawes-ligth btn">Finland</button>
+    <button id="ukBtn" class="wawes-effect wawes-ligth btn">UK</button>
+    <button id="italyBtn" class="wawes-effect wawes-ligth btn">Italy</button>
     <div id="productsView">
-        <ul id="products">
 
-        </ul>
-        
+      <h5>Yarns: </h5>
+      <table id="yarns">
+      <tr>
+        <th>Name</th>
+        <th>Colour</th>
+        <th>Material</th>
+        <th>Weight</th>
+      </tr>
+
+      <tb>
+
+      </tb>
+      </table>
+      
+
+      <table id="patterns">
+      </table>
+
+      <table id="hooks">
+      </table>
+
+      <table id="needles">
+      </table>
+
+
+
+
+
+
+        <!--<div class="row">
+            <div class="col s12">
+              <ul class="tabs">
+                <li class="tab col s2"><a href="#allProductsTab">All products</a></li>
+                <li class="tab col s2"><a class="active" href="#patternsTab">Patterns</a></li>
+                <li class="tab col s2"><a class="active" href="#yarnsTab">Yarns</a></li>
+                <li class="tab col s2"><a class="active" href="#knittingNeedlesTab">Knitting Needles</a></li>
+                <li class="tab col s2"><a class="active" href="#crochetingHooksTab">Crocheting Hooks</a></li>
+              </ul>
+
+              <div id="allProductsTab" class="col s12">
+                <h2>All products</h2>
+
+
+              </div>
+            <div id="patternsTab" class="col s12">Patterns</div>
+            <div id="yarnsTab" class="col s12">Yarns</div>
+            <div id="knittingNeedlesTab" class="col s12">Knitting Needles</div>
+            <div id="crochetingHooksTab" class="col s12">Crocheting Hooks</div>
+            </div>
+
+          </div>-->
     </div>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>
