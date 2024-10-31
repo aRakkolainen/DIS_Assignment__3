@@ -6,7 +6,13 @@ let britishProducts = [];
 let italianProducts = [];
 let productsView = document.getElementById("productsView");
 let yarnsTable = document.getElementById("yarns");
+let patternsTable = document.getElementById("patterns");
+let hooksTable = document.getElementById("hooks");
+let needlesTable = document.getElementById("needles");
 let yarnsNotUpdated = true;
+let patternsNotUpdated = true; 
+let hooksNotUpdated = true; 
+let needlesNotUpdated = true; 
 
 
 //MVP version (This prints the data from db once, but maybe it needs to be dynamic so it would be more useful..)
@@ -23,98 +29,175 @@ finlandBtn.addEventListener("click", async () => {
     let needles = productCatalog.needles; 
     let hooks = productCatalog.hooks; 
     console.log(yarns)
-    let title = document.createElement("th");
-    yarnsTable.appendChild(title);    
-
-
-
     if (yarnsNotUpdated) {
-        for (let i=0; i < yarns.length; i++) {
-            let row = document.createElement("tr");
-            let name = document.createElement("td");
-            let color = document.createElement("td");
-            let material = document.createElement("td");
-            let weight = document.createElement("td");
-            name.innerText = yarns[i].name;
-            color.innerText = yarns[i].colour; 
-            material.innerText = yarns[i].material; 
-            weight.innerText = yarns[i].weight; 
-
-            row.appendChild(name); 
-            row.appendChild(color);
-            row.appendChild(material);
-            row.appendChild(weight);
-            yarnsTable.appendChild(row);
-        }
+        fillYarnsTable(yarns);
     }
     yarnsNotUpdated = false;
-    /*yarns.array.forEach(element => {
+
+    if (patternsNotUpdated) {
+        fillPatternsTable(patterns);
+    }
+    patternsNotUpdated = false;
+    
+    if (hooksNotUpdated) {
+        fillHooksTable(hooks);
+    }
+
+    if (needlesNotUpdated) {
+        fillNeedlesTable(needles);
+    }
+
+});
+
+
+        
+        ukBtn.addEventListener("click", async () => {
+            console.log("Loading product catalog for UK..");
+            let url = "http://localhost:3001/britishProducts";
+            let result = await fetch(url);
+            let tempBritishProducts = await result.json();
+            britishProducts = tempBritishProducts.products;
+            addProductToTheView(britishProducts);
+        });
+        
+        italyBtn.addEventListener("click", async () => {
+            console.log("Loading product catalog for Italy..");
+            let url = "http://localhost:3001/italianProducts";
+            let result = await fetch(url);
+            let products = await result.json();
+            console.log(products)
+        });
+        
+        
+        
+    
+                           
+                           
+function fillYarnsTable(yarns) {
+    yarns.forEach((yarn) => {
         let row = document.createElement("tr");
-        console.log(element)
-        row.innerText = element;
-        productTable.appendChild(row);
-    });*/
-
-    /*if (finnishProducts.length == 0) {
-        let result = await fetch(url);
-        let tempProducts = await result.json();
-        finnishProducts = tempProducts.products;
-        console.log(finnishProducts);
-        //addProductToTheView(finnishProducts);
-    }*/
-    //Showing in the view 
-    // if (finnishProducts.length == 0) {
-    //     productsView.innerText = "No results";
-    // }
-
-    // console.log(finnishProducts);
-});
-
-ukBtn.addEventListener("click", async () => {
-    console.log("Loading product catalog for UK..");
-    let url = "http://localhost:3001/britishProducts";
-    let result = await fetch(url);
-    let tempBritishProducts = await result.json();
-    britishProducts = tempBritishProducts.products;
-    addProductToTheView(britishProducts);
-});
-
-italyBtn.addEventListener("click", async () => {
-    console.log("Loading product catalog for Italy..");
-    let url = "http://localhost:3001/italianProducts";
-    let result = await fetch(url);
-    let products = await result.json();
-    console.log(products)
-});
-
-
-/* function addProductToTheView(products) {
-    //Clearing the list before adding new ones
-    clearProductsView();
-    products.forEach(element => {
-        if (element) {
-            let productItem = document.createElement("li");
-            productItem.setAttribute("class", "productItem");
-            productItem.setAttribute("id", element.id);
-            let productName = document.createElement("h3");
-            productName.innerText = element.name;
-            productName.setAttribute("id", "productName")
-            let productPrice = document.createElement("p");
-            productPrice = element.price
-            // productPrice.setAttribute("id", "productPrice");
-            productItem.appendChild(document.createTextNode(element.name));
-            productItem.appendChild(document.createTextNode(element.price));
-            productsElementsList.appendChild(productItem);
-            productsView.appendChild(productsElementList);
-
-        }
-
-
-    });
+        let brand = document.createElement("td");
+        let name = document.createElement("td");
+        let color = document.createElement("td");
+        let material = document.createElement("td");
+        let origin = document.createElement("td");
+        let type =  document.createElement("td");
+        let weight = document.createElement("td");
+        let length = document.createElement("td");
+        let price =  document.createElement("td");
+        brand.innerText = yarn.brand;
+        name.innerText = yarn.name;
+        color.innerText = yarn.colour; 
+        type.innerText = yarn.type;
+        material.innerText = yarn.material;
+        origin.innerText = yarn.origin;
+        weight.innerText = yarn.weight;
+        length.innerText = yarn.length;
+        price.innerText = yarn.price;
+        row.appendChild(brand);
+        row.appendChild(name); 
+        row.appendChild(color);
+        row.appendChild(type);
+        row.appendChild(material);
+        row.appendChild(origin);
+        row.appendChild(weight);
+        row.appendChild(length);
+        row.appendChild(price);
+        yarnsTable.appendChild(row);
+        });
 }
+                               
+                            
+                            
+                            
+function fillPatternsTable(patterns) {
+    if (patterns != null) {
+        patterns.forEach(pattern => {
+                let row = document.createElement("tr");
+                let title = document.createElement("td");
+                let designer = document.createElement("td");
+                let type =  document.createElement("td");
+                let difficulty = document.createElement("td");
+                let instructions = document.createElement("td");
+                let recommendedYarn = document.createElement("td");
+                let price =  document.createElement("td");
+                title.innerText = pattern.title;
+                designer.innerText = pattern.designer;
+                type.innerText = pattern.type;
+                difficulty.innerText = pattern.difficulty; 
+                instructions.innerText = pattern.instructions;
+                recommendedYarn.innerText = pattern.recommendedYarn;
 
-function clearProductsView(){
-    productsElementList.forEach(element => {
-        productsView.removeChild(document.getElementById(element.id));
-    })
-}*/
+                if (pattern.price == 0) {
+                    price.innerText = "Free";
+                } else {
+                    price.innerText = pattern.price;
+                }
+                row.appendChild(title);
+                row.appendChild(designer); 
+                row.appendChild(type);
+                row.appendChild(difficulty);
+                row.appendChild(instructions);
+                row.appendChild(recommendedYarn);
+                row.appendChild(price);
+                patternsTable.appendChild(row);
+                });     
+    }
+                              
+}
+                            
+function fillHooksTable(crochetingHooks) {
+    if (crochetingHooks != null) {
+        crochetingHooks.forEach(hook => {
+                let row = document.createElement("tr");
+                let brand = document.createElement("td");
+                let name = document.createElement("td");
+                let size =  document.createElement("td");
+                let material = document.createElement("td");
+                let origin = document.createElement("td");
+                let price =  document.createElement("td");
+                brand.innerText = hook.brand;
+                name.innerText = hook.name;
+                size.innerText = hook.size;
+                material.innerText = hook.material; 
+                origin.innerText = hook.origin;
+                price.innerText = hook.price;
+                row.appendChild(brand);
+                row.appendChild(name); 
+                row.appendChild(size);
+                row.appendChild(material);
+                row.appendChild(origin);
+                row.appendChild(price);
+                hooksTable.appendChild(row);
+                });     
+    }                      
+}
+                            
+function fillNeedlesTable (knittingNeedles) {
+    if (knittingNeedles != null) {
+        knittingNeedles.forEach(needle => {
+                let row = document.createElement("tr");
+                let brand = document.createElement("td");
+                let name = document.createElement("td");
+                let size =  document.createElement("td");
+                let material = document.createElement("td");
+                let origin = document.createElement("td");
+                let price =  document.createElement("td");
+                brand.innerText = needle.brand;
+                name.innerText = needle.name;
+                size.innerText = needle.size;
+                material.innerText = needle.material; 
+                origin.innerText = needle.origin;
+                price.innerText = needle.price;
+                row.appendChild(brand);
+                row.appendChild(name); 
+                row.appendChild(size);
+                row.appendChild(material);
+                row.appendChild(origin);
+                row.appendChild(price);
+                needlesTable.appendChild(row);
+                });     
+    }                   
+}
+                            
+                            

@@ -6,23 +6,30 @@
     <title>Simple Yarn Shop</title>
     <script type="module" src="./javascripts/view.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="./stylesheets/style.css">
+
 
 </head>
 <body>
     <h1>Welcome to Simple Yarn Shop</h1>
-    <p>Choose your location: </p>
+    <h4>Choose your location </h4>
     <button id="finlandBtn" class="wawes-effect wawes-ligth btn">Finland</button>
     <button id="ukBtn" class="wawes-effect wawes-ligth btn">UK</button>
     <button id="italyBtn" class="wawes-effect wawes-ligth btn">Italy</button>
     <div id="productsView">
 
-      <h5>Yarns: </h5>
-      <table id="yarns">
-      <tr>
+      <h5 id="yarnsTitle" class="title">Yarns </h5>
+      <table id="yarns" class="responsive-table">
+      <tr id="yarnHeaders">
+        <th>Brand</th>
         <th>Name</th>
-        <th>Colour</th>
+        <th>Color</th>
+        <th>Type</th>
         <th>Material</th>
+        <th>Country of Origin</th>
         <th>Weight</th>
+        <th>Length</th>
+        <th>Price</th>
       </tr>
 
       <tb>
@@ -31,42 +38,41 @@
       </table>
       
 
-      <table id="patterns">
+      <table id="patterns" class="responsive-table">
+        <h5 id="patternsTitle" class="title">Patterns </h5>
+        <tr id=patternHeaders">
+          <th>Title</th>
+          <th>Designer</th>
+          <th>Type</th>
+          <th>Difficulty</th>
+          <th>Instructions</th>
+          <th>Price</th>
+        </tr>
       </table>
 
-      <table id="hooks">
+      <table id="hooks" class="responsive-table">
+        <h5 id="hooksTitle" class="title">Crochet Hooks </h5>
+        <tr id=hooksHeaders">
+          <th>Brand</th>
+          <th>Name</th>
+          <th>Size</th>
+          <th>Material</th>
+          <th>Country of Origin</th>
+          <th>Price</th>
+        </tr>
       </table>
 
-      <table id="needles">
+      <table id="needles" class="responsive-table">
+        <h5 id="needlesTitle" class="title">Knitting Needles </h5>
+        <tr id=needlesHeaders">
+          <th>Brand</th>
+          <th>Name</th>
+          <th>Size</th>
+          <th>Material</th>
+          <th>Country of origin</th>
+          <th>Price</th>
+        </tr>
       </table>
-
-
-
-
-
-
-        <!--<div class="row">
-            <div class="col s12">
-              <ul class="tabs">
-                <li class="tab col s2"><a href="#allProductsTab">All products</a></li>
-                <li class="tab col s2"><a class="active" href="#patternsTab">Patterns</a></li>
-                <li class="tab col s2"><a class="active" href="#yarnsTab">Yarns</a></li>
-                <li class="tab col s2"><a class="active" href="#knittingNeedlesTab">Knitting Needles</a></li>
-                <li class="tab col s2"><a class="active" href="#crochetingHooksTab">Crocheting Hooks</a></li>
-              </ul>
-
-              <div id="allProductsTab" class="col s12">
-                <h2>All products</h2>
-
-
-              </div>
-            <div id="patternsTab" class="col s12">Patterns</div>
-            <div id="yarnsTab" class="col s12">Yarns</div>
-            <div id="knittingNeedlesTab" class="col s12">Knitting Needles</div>
-            <div id="crochetingHooksTab" class="col s12">Crocheting Hooks</div>
-            </div>
-
-          </div>-->
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>

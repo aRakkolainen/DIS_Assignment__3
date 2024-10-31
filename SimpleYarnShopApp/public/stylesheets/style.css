@@ -8,10 +8,15 @@ a {
 }
 
 div#productsView {
-  padding:15%;
+  padding:1.5%;
 }
 
-li.productItem {
-  padding: 10%;
-  list-style: none;
-} 
+
+
+
+h5.title {
+  text-decoration: bold;
+}
+
+
+
