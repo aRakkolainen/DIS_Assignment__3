@@ -1,3 +1,4 @@
+
 let finlandBtn = document.getElementById("finlandBtn");
 let ukBtn = document.getElementById("ukBtn");
 let italyBtn = document.getElementById("italyBtn");
@@ -5,7 +6,7 @@ let finnishProducts = [];
 let britishProducts = [];
 let italianProducts = [];
 let productsView = document.getElementById("productsView");
-let yarnsTable = document.getElementById("yarns");
+let yarnsTable = document.getElementById("yarnsTableBody");
 let patternsTable = document.getElementById("patterns");
 let hooksTable = document.getElementById("hooks");
 let needlesTable = document.getElementById("needles");
@@ -14,6 +15,8 @@ let patternsNotUpdated = true;
 let hooksNotUpdated = true; 
 let needlesNotUpdated = true; 
 
+let viewNotUpdated = true;
+let viewCleared = false;
 
 //MVP version (This prints the data from db once, but maybe it needs to be dynamic so it would be more useful..)
 finlandBtn.addEventListener("click", async () => {
@@ -24,55 +27,94 @@ finlandBtn.addEventListener("click", async () => {
 
     let productCatalog = await result.json(); 
 
+    console.log(productCatalog);    
     let yarns = productCatalog.yarns; 
     let patterns = productCatalog.patterns; 
     let needles = productCatalog.needles; 
     let hooks = productCatalog.hooks; 
-    console.log(yarns)
-    if (yarnsNotUpdated) {
-        fillYarnsTable(yarns);
-    }
-    yarnsNotUpdated = false;
-
-    if (patternsNotUpdated) {
-        fillPatternsTable(patterns);
-    }
-    patternsNotUpdated = false;
     
-    if (hooksNotUpdated) {
-        fillHooksTable(hooks);
+    clearProductCatalogView();
+    console.log(viewNotUpdated);
+    if (!viewNotUpdated && viewCleared) {
+        fillProductCatalogView(yarns, patterns, needles, hooks); 
     }
-
-    if (needlesNotUpdated) {
-        fillNeedlesTable(needles);
-    }
-
+    
+    viewNotUpdated = false;
 });
 
 
         
         ukBtn.addEventListener("click", async () => {
+            //clearProductCatalogView();
             console.log("Loading product catalog for UK..");
             let url = "http://localhost:3001/britishProducts";
             let result = await fetch(url);
-            let tempBritishProducts = await result.json();
-            britishProducts = tempBritishProducts.products;
-            addProductToTheView(britishProducts);
+            let productCatalog = await result.json(); 
+            console.log(productCatalog); 
+
+            let yarns = productCatalog.yarns; 
+            let patterns = productCatalog.patterns; 
+            let needles = productCatalog.needles; 
+            let hooks = productCatalog.hooks; 
+
+            fillYarnsTable(yarns);
+
+
+            if (patternsNotUpdated) {
+                fillPatternsTable(patterns);
+            }
+            patternsNotUpdated = false;
+            
+            if (hooksNotUpdated) {
+                fillHooksTable(hooks);
+            }
+            hooksNotUpdated = false;
+        
+            if (needlesNotUpdated) {
+                fillNeedlesTable(needles);
+            }
+            needlesNotUpdated = false;
         });
         
         italyBtn.addEventListener("click", async () => {
             console.log("Loading product catalog for Italy..");
             let url = "http://localhost:3001/italianProducts";
             let result = await fetch(url);
-            let products = await result.json();
-            console.log(products)
+            let productCatalog = await result.json(); 
+
+            let yarns = productCatalog.yarns; 
+            let patterns = productCatalog.patterns; 
+            let needles = productCatalog.needles; 
+            let hooks = productCatalog.hooks; 
+            console.log(productCatalog); 
+            fillYarnsTable(yarns);
+
+
+            if (patternsNotUpdated) {
+                fillPatternsTable(patterns);
+            }
+            patternsNotUpdated = false;
+            
+            if (hooksNotUpdated) {
+                fillHooksTable(hooks);
+            }
+            hooksNotUpdated = false;
+        
+            if (needlesNotUpdated) {
+                fillNeedlesTable(needles);
+            }
+            needlesNotUpdated = false;
+
         });
+ 
         
-        
-        
-    
-                           
-                           
+function fillProductCatalogView(yarns, patterns, needles, hooks) {
+    fillYarnsTable(yarns);
+    fillPatternsTable(patterns);
+    fillHooksTable(hooks);
+    fillNeedlesTable(needles);
+}
+
 function fillYarnsTable(yarns) {
     yarns.forEach((yarn) => {
         let row = document.createElement("tr");
@@ -105,6 +147,7 @@ function fillYarnsTable(yarns) {
         row.appendChild(price);
         yarnsTable.appendChild(row);
         });
+
 }
                                
                             
@@ -198,6 +241,24 @@ function fillNeedlesTable (knittingNeedles) {
                 needlesTable.appendChild(row);
                 });     
     }                   
+}
+
+
+function clearProductCatalogView() {
+    for (let i=0; i < yarnsTable.rows.length-1; i++) {
+        yarnsTable.deleteRow(i);
+    }
+
+    for (let i=0; i < patternsTable.rows.length; i++) {
+        patternsTable.deleteRow(i);
+    }
+    for (let i=0; i < hooksTable.rows.length; i++) {
+        hooksTable.deleteRow(i);
+    }
+    for (let i=0; i < needlesTable.rows.length; i++) {
+        needlesTable.deleteRow(i);
+    }
+    viewCleared = true; 
 }
                             
                             

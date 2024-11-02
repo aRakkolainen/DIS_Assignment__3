@@ -16,7 +16,6 @@ router.get('/', function(req, res, next) {
 
 router.get('/', async (req, res) => {
   try {
-    console.log("HELLO!!!")
     const result = await finlandDB.query('SELECT * FROM Yarn');
     console.log(result);
     res.json(result.rows);
@@ -35,7 +34,6 @@ router.get('/finnishProducts', async (req, res) => {
     crochetHookQuery: 'SELECT * FROM \"CrochetHook\"'
   };
   
-  console.log(queries.yarnQuery)
   let response = {};
   try {
     let yarnResult = await finlandDB.query(queries.yarnQuery);
@@ -43,14 +41,14 @@ router.get('/finnishProducts', async (req, res) => {
     let patternResult = await finlandDB.query(queries.patternQuery);
     let hookResult = await finlandDB.query(queries.crochetHookQuery);
     
-
+    
     response = {
       yarns: yarnResult.rows,
       needles: needleResult.rows, 
       patterns: patternResult.rows, 
       hooks: hookResult.rows
     }
-
+    
     console.log(response)
 
   } catch(error) {
@@ -66,13 +64,27 @@ res.json(response);
 router.get('/britishProducts', async (req, res) => {
   console.log("Fetching products from UK..")
   let response = {}
-  try {
-  let query = "SELECT * FROM product";
-  let result = await ukDB.query(query);
-
-  response = {
-    'products': result.rows
+  let queries = {
+    yarnQuery: "SELECT * FROM \"Yarn\"",
+    knittingNeedleQuery: 'SELECT * FROM \"KnittingNeedle\"',
+    patternQuery: 'SELECT * FROM \"Pattern\"',
+    crochetHookQuery: 'SELECT * FROM \"CrochetHook\"'
   };
+  try {
+    let yarnResult = await ukDB.query(queries.yarnQuery);
+    let needleResult = await ukDB.query(queries.knittingNeedleQuery);
+    let patternResult = await ukDB.query(queries.patternQuery);
+    let hookResult = await ukDB.query(queries.crochetHookQuery);
+    
+
+    response = {
+      yarns: yarnResult.rows,
+      needles: needleResult.rows, 
+      patterns: patternResult.rows, 
+      hooks: hookResult.rows
+    }
+
+    console.log(response)
 
 } catch(error) {
   response = {
@@ -85,12 +97,36 @@ router.get('/britishProducts', async (req, res) => {
 
 router.get('/italianProducts', async (req, res) => {
   console.log("Fetching products from Italy..")
-  let query = "SELECT * FROM product";
-  const result = await italyDB.query(query);
-
-  const response = {
-    'products': result.rows
+  let response = {};
+  let queries = {
+    yarnQuery: "SELECT * FROM \"Yarn\"",
+    knittingNeedleQuery: 'SELECT * FROM \"KnittingNeedle\"',
+    patternQuery: 'SELECT * FROM \"Pattern\"',
+    crochetHookQuery: 'SELECT * FROM \"CrochetHook\"'
   };
+
+  try {
+    let yarnResult = await italyDB.query(queries.yarnQuery);
+    let needleResult = await italyDB.query(queries.knittingNeedleQuery);
+    let patternResult = await italyDB.query(queries.patternQuery);
+    let hookResult = await italyDB.query(queries.crochetHookQuery);
+    
+
+    response = {
+      yarns: yarnResult.rows,
+      needles: needleResult.rows, 
+      patterns: patternResult.rows, 
+      hooks: hookResult.rows
+    }
+
+    console.log(response)
+
+} catch(error) {
+  response = {
+    'products': [],
+    'errorMsg': error
+  }
+}
 
   res.json(response);
   
