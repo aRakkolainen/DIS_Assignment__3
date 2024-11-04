@@ -5,110 +5,72 @@ let italyBtn = document.getElementById("italyBtn");
 let finnishProducts = [];
 let britishProducts = [];
 let italianProducts = [];
-let productsView = document.getElementById("productsView");
-let yarnsTable = document.getElementById("yarnsTableBody");
-let patternsTable = document.getElementById("patterns");
-let hooksTable = document.getElementById("hooks");
-let needlesTable = document.getElementById("needles");
-let yarnsNotUpdated = true;
-let patternsNotUpdated = true; 
-let hooksNotUpdated = true; 
-let needlesNotUpdated = true; 
 
-let viewNotUpdated = true;
+let productsView = document.getElementById("productsView");
+let yarnsTableBody = document.getElementById("yarnsTableBody");
+let patternsTableBody = document.getElementById("patternsTableBody");
+let hooksTableBody = document.getElementById("hooksTableBody");
+let needlesTableBody = document.getElementById("needlesTableBody");
+
+let yarnHeaders = document.getElementById("yarnHeaders");
+let patternHeaders = document.getElementById("patternHeaders");
+let hookHeaders = document.getElementById("hookHeaders");
+let needleHeaders = document.getElementById("needleHeaders");
+
 let viewCleared = false;
 
 //MVP version (This prints the data from db once, but maybe it needs to be dynamic so it would be more useful..)
-finlandBtn.addEventListener("click", async () => {
+finlandBtn.addEventListener("click", () => {
     console.log("Loading product catalog for Finland..");
     let url = "http://localhost:3001/finnishProducts";
-
-    let result = await fetch(url);
-
-    let productCatalog = await result.json(); 
-
-    console.log(productCatalog);    
-    let yarns = productCatalog.yarns; 
-    let patterns = productCatalog.patterns; 
-    let needles = productCatalog.needles; 
-    let hooks = productCatalog.hooks; 
+    setProductCatalogVisible();
     
     clearProductCatalogView();
-    console.log(viewNotUpdated);
-    if (!viewNotUpdated && viewCleared) {
-        fillProductCatalogView(yarns, patterns, needles, hooks); 
-    }
-    
-    viewNotUpdated = false;
+    if(viewCleared) {
+        fetchDataAndFillProductCatalogView(url); 
+    }    
 });
 
 
         
-        ukBtn.addEventListener("click", async () => {
-            //clearProductCatalogView();
-            console.log("Loading product catalog for UK..");
-            let url = "http://localhost:3001/britishProducts";
-            let result = await fetch(url);
-            let productCatalog = await result.json(); 
-            console.log(productCatalog); 
+ukBtn.addEventListener("click", async () => {
+    console.log("Loading product catalog for UK..");
+    let url = "http://localhost:3001/britishProducts";
+    setProductCatalogVisible();
+    clearProductCatalogView();
 
-            let yarns = productCatalog.yarns; 
-            let patterns = productCatalog.patterns; 
-            let needles = productCatalog.needles; 
-            let hooks = productCatalog.hooks; 
-
-            fillYarnsTable(yarns);
-
-
-            if (patternsNotUpdated) {
-                fillPatternsTable(patterns);
-            }
-            patternsNotUpdated = false;
-            
-            if (hooksNotUpdated) {
-                fillHooksTable(hooks);
-            }
-            hooksNotUpdated = false;
+    if(viewCleared) {
+        fetchDataAndFillProductCatalogView(url);
+    }
+    });
         
-            if (needlesNotUpdated) {
-                fillNeedlesTable(needles);
-            }
-            needlesNotUpdated = false;
-        });
-        
-        italyBtn.addEventListener("click", async () => {
-            console.log("Loading product catalog for Italy..");
-            let url = "http://localhost:3001/italianProducts";
-            let result = await fetch(url);
-            let productCatalog = await result.json(); 
+italyBtn.addEventListener("click", async () => {
+    console.log("Loading product catalog for Italy..");
+    let url = "http://localhost:3001/italianProducts";
+    setProductCatalogVisible();
+    clearProductCatalogView();
 
-            let yarns = productCatalog.yarns; 
-            let patterns = productCatalog.patterns; 
-            let needles = productCatalog.needles; 
-            let hooks = productCatalog.hooks; 
-            console.log(productCatalog); 
-            fillYarnsTable(yarns);
+    if(viewCleared) {
+        fetchDataAndFillProductCatalogView(url);
+    }
 
-
-            if (patternsNotUpdated) {
-                fillPatternsTable(patterns);
-            }
-            patternsNotUpdated = false;
-            
-            if (hooksNotUpdated) {
-                fillHooksTable(hooks);
-            }
-            hooksNotUpdated = false;
-        
-            if (needlesNotUpdated) {
-                fillNeedlesTable(needles);
-            }
-            needlesNotUpdated = false;
-
-        });
+    });
  
+
+
+function setProductCatalogVisible() {
+    productsView.setAttribute("class", "catalogShown");
+}        
         
-function fillProductCatalogView(yarns, patterns, needles, hooks) {
+async function fetchDataAndFillProductCatalogView(url) {
+    let result = await fetch(url);
+    let productCatalog = await result.json(); 
+
+    let yarns = productCatalog.yarns; 
+    let patterns = productCatalog.patterns; 
+    let needles = productCatalog.needles; 
+    let hooks = productCatalog.hooks; 
+    console.log("Product catalog: ", productCatalog); 
     fillYarnsTable(yarns);
     fillPatternsTable(patterns);
     fillHooksTable(hooks);
@@ -116,8 +78,11 @@ function fillProductCatalogView(yarns, patterns, needles, hooks) {
 }
 
 function fillYarnsTable(yarns) {
+    let yarnID = 0; 
     yarns.forEach((yarn) => {
+        
         let row = document.createElement("tr");
+        row.setAttribute("id", "yarn#" + yarnID.toString());
         let brand = document.createElement("td");
         let name = document.createElement("td");
         let color = document.createElement("td");
@@ -145,7 +110,8 @@ function fillYarnsTable(yarns) {
         row.appendChild(weight);
         row.appendChild(length);
         row.appendChild(price);
-        yarnsTable.appendChild(row);
+        yarnsTableBody.appendChild(row);
+        yarnID++;
         });
 
 }
@@ -155,8 +121,10 @@ function fillYarnsTable(yarns) {
                             
 function fillPatternsTable(patterns) {
     if (patterns != null) {
+        let patternID = 0
         patterns.forEach(pattern => {
                 let row = document.createElement("tr");
+                row.setAttribute("id", "pattern#" + patternID.toString());
                 let title = document.createElement("td");
                 let designer = document.createElement("td");
                 let type =  document.createElement("td");
@@ -183,16 +151,19 @@ function fillPatternsTable(patterns) {
                 row.appendChild(instructions);
                 row.appendChild(recommendedYarn);
                 row.appendChild(price);
-                patternsTable.appendChild(row);
+                patternsTableBody.appendChild(row);
+                patternID++;
                 });     
     }
                               
 }
                             
 function fillHooksTable(crochetingHooks) {
+    let hooksID = 0; 
     if (crochetingHooks != null) {
         crochetingHooks.forEach(hook => {
                 let row = document.createElement("tr");
+                row.setAttribute("id", "hook#" + hooksID.toString());
                 let brand = document.createElement("td");
                 let name = document.createElement("td");
                 let size =  document.createElement("td");
@@ -211,15 +182,18 @@ function fillHooksTable(crochetingHooks) {
                 row.appendChild(material);
                 row.appendChild(origin);
                 row.appendChild(price);
-                hooksTable.appendChild(row);
+                hooksTableBody.appendChild(row);
+                hooksID++;
                 });     
     }                      
 }
                             
 function fillNeedlesTable (knittingNeedles) {
+    let needlesID = 0; 
     if (knittingNeedles != null) {
         knittingNeedles.forEach(needle => {
                 let row = document.createElement("tr");
+                row.setAttribute("id", "needle#" + needlesID.toString());
                 let brand = document.createElement("td");
                 let name = document.createElement("td");
                 let size =  document.createElement("td");
@@ -238,27 +212,38 @@ function fillNeedlesTable (knittingNeedles) {
                 row.appendChild(material);
                 row.appendChild(origin);
                 row.appendChild(price);
-                needlesTable.appendChild(row);
+                needlesTableBody.appendChild(row);
+                needlesID++;
                 });     
     }                   
 }
 
 
 function clearProductCatalogView() {
-    for (let i=0; i < yarnsTable.rows.length-1; i++) {
-        yarnsTable.deleteRow(i);
-    }
 
-    for (let i=0; i < patternsTable.rows.length; i++) {
-        patternsTable.deleteRow(i);
-    }
-    for (let i=0; i < hooksTable.rows.length; i++) {
-        hooksTable.deleteRow(i);
-    }
-    for (let i=0; i < needlesTable.rows.length; i++) {
-        needlesTable.deleteRow(i);
-    }
+    let yarnID = "yarn#";
+    clearTable(yarnsTableBody, yarnID);
+
+    let patternID = "pattern#";
+    clearTable(patternsTableBody, patternID);
+
+    let hookID = "hook#";
+    clearTable(hooksTableBody, hookID);
+    
+    let needleID = "needle#";
+    clearTable(needlesTableBody, needleID);
+
     viewCleared = true; 
+}
+
+
+function clearTable(tableBody, baseID){
+    let numberOfRows = tableBody.rows.length;
+    for (let i=0; i < numberOfRows; i++) {
+        let id = baseID + i; 
+        let row = document.getElementById(id);
+        tableBody.removeChild(row);
+    }
 }
                             
                             

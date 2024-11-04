@@ -11,17 +11,16 @@
 
 </head>
 <body>
-    <h1>Welcome to Simple Yarn Shop</h1>
-    <h4>Choose your location </h4>
+    <h1 class="welcomeText">Welcome to Simple Yarn Shop</h1>
+    <h4 class="locationText">Choose your location </h4>
     <button id="finlandBtn" class="wawes-effect wawes-ligth btn">Finland</button>
     <button id="ukBtn" class="wawes-effect wawes-ligth btn">UK</button>
     <button id="italyBtn" class="wawes-effect wawes-ligth btn">Italy</button>
-    <div id="productsView">
-
+    <div id="productsView" class="catalogHidden">
       <h5 id="yarnsTitle" class="title">Yarns </h5>
       <table id="yarns" class="responsive-table">
-      <thead>
-        <tr id="yarnHeaders">
+      <thead >
+        <tr id="yarnHeaders" class="headersHidden">
           <th>Brand</th>
           <th>Name</th>
           <th>Color</th>
@@ -33,15 +32,13 @@
           <th>Price</th>
         </tr>
       </thead>
-
-      <tbody id="yarnsTableBody">
-      </tbody>
+      <tbody id="yarnsTableBody"></tbody>
       </table>
-      
 
+      <h5 id="patternsTitle" class="title">Patterns </h5>
       <table id="patterns" class="responsive-table">
-        <h5 id="patternsTitle" class="title">Patterns </h5>
         <thead>
+          <tr id="patternHeaders" class="headersHidden">
           <th>Title</th>
           <th>Designer</th>
           <th>Type</th>
@@ -49,13 +46,14 @@
           <th>Instructions</th>
           <th>Price</th>
         </tr>
-        </thead><tr id=patternHeaders">
+        </thead>
+          <tbody id="patternsTableBody"></tbody>
       </table>
 
+      <h5 id="hooksTitle" class="title">Crochet Hooks </h5>
       <table id="hooks" class="responsive-table">
-        <h5 id="hooksTitle" class="title">Crochet Hooks </h5>
         <thead>
-          <tr id=hooksHeaders">
+          <tr id="hookHeaders" class="headersHidden">
             <th>Brand</th>
             <th>Name</th>
             <th>Size</th>
@@ -64,18 +62,23 @@
             <th>Price</th>
           </tr>
         </thead>
+        <tbody id="hooksTableBody"></tbody>
+
       </table>
 
+      <h5 id="needlesTitle" class="title">Knitting Needles </h5>
       <table id="needles" class="responsive-table">
-        <h5 id="needlesTitle" class="title">Knitting Needles </h5>
-        <tr id=needlesHeaders">
-          <th>Brand</th>
-          <th>Name</th>
-          <th>Size</th>
-          <th>Material</th>
-          <th>Country of origin</th>
-          <th>Price</th>
-        </tr>
+        <thead>
+          <tr id="needleHeaders" class="headersHidden">
+            <th>Brand</th>
+            <th>Name</th>
+            <th>Size</th>
+            <th>Material</th>
+            <th>Country of origin</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody id="needlesTableBody"></tbody>
       </table>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

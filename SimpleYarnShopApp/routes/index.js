@@ -10,20 +10,10 @@ const italyDB = require('./db/italyDB.js');
 
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+/* router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
-});
+}); */
 
-router.get('/', async (req, res) => {
-  try {
-    const result = await finlandDB.query('SELECT * FROM Yarn');
-    console.log(result);
-    res.json(result.rows);
-  } catch(err) {
-    console.error(err);
-    res.status(500).send('Internal Server Error occured');
-  }
-})
 
 router.get('/finnishProducts', async (req, res) => {
   console.log("Fetching products from Finland..")

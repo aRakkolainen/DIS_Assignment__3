@@ -1,6 +1,7 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #f3e5f5;
 }
 
 a {
@@ -11,12 +12,49 @@ div#productsView {
   padding:1.5%;
 }
 
+h1.welcomeText {
+  color: #7b1fa2
+}
 
+h4.locationText {
+  color: #8e24aa; 
+}
 
+table.responsive-table {
+  background-color: #fcf1fd;
+}
 
 h5.title {
   text-decoration: bold;
+  color:#6a1b9a;
 }
+
+
+div.catalogHidden {
+  visibility: hidden;
+}
+
+div.catalogShown {
+  visibility: visible;
+}
+
+button#finlandBtn {
+  background-color: #9c27b0;
+}
+
+button#ukBtn {
+  background-color: #9c27b0;
+}
+
+button#italyBtn {
+  background-color: #9c27b0;
+}
+
+th{
+  color:#7b1fa2 ;
+}
+
+
 
 
 
