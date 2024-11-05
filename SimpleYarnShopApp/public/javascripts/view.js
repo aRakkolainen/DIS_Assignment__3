@@ -17,11 +17,14 @@ let patternHeaders = document.getElementById("patternHeaders");
 let hookHeaders = document.getElementById("hookHeaders");
 let needleHeaders = document.getElementById("needleHeaders");
 
+let selectedCountry = document.getElementById("selectedCountry");
+
 let viewCleared = false;
 
 //MVP version (This prints the data from db once, but maybe it needs to be dynamic so it would be more useful..)
 finlandBtn.addEventListener("click", () => {
     console.log("Loading product catalog for Finland..");
+    selectedCountry.innerText = 'Showing product catalog for Finland';
     let url = "http://localhost:3001/finnishProducts";
     setProductCatalogVisible();
     
@@ -35,6 +38,7 @@ finlandBtn.addEventListener("click", () => {
         
 ukBtn.addEventListener("click", async () => {
     console.log("Loading product catalog for UK..");
+    selectedCountry.innerText = 'Showing product catalog for UK';
     let url = "http://localhost:3001/britishProducts";
     setProductCatalogVisible();
     clearProductCatalogView();
@@ -46,6 +50,7 @@ ukBtn.addEventListener("click", async () => {
         
 italyBtn.addEventListener("click", async () => {
     console.log("Loading product catalog for Italy..");
+    selectedCountry.innerText = 'Showing product catalog for Italy';
     let url = "http://localhost:3001/italianProducts";
     setProductCatalogVisible();
     clearProductCatalogView();
