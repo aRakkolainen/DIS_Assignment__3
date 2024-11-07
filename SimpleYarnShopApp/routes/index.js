@@ -1,5 +1,4 @@
 var express = require('express');
-const pgp = require('pg-promise');
 var router = express.Router();
 
 // All database connections: 
@@ -9,10 +8,7 @@ const italyDB = require('./db/italyDB.js');
 
 
 
-/* GET home page. */
-/* router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-}); */
+
 
 
 router.get('/finnishProducts', async (req, res) => {
@@ -38,8 +34,6 @@ router.get('/finnishProducts', async (req, res) => {
       patterns: patternResult.rows, 
       hooks: hookResult.rows
     }
-    
-    //console.log(response)
 
   } catch(error) {
     response = {
@@ -55,7 +49,6 @@ router.get('/britishProducts', async (req, res) => {
   console.log("Fetching products from UK..")
   let response = {}
 
-  // To-Do change to partitioned table..
   let queries = {
     yarnQuery: "SELECT * FROM \"Yarn_partitions\"",
     knittingNeedleQuery: 'SELECT * FROM \"KnittingNeedle\"',
@@ -90,7 +83,6 @@ router.get('/britishProducts', async (req, res) => {
 router.get('/italianProducts', async (req, res) => {
   console.log("Fetching products from Italy..")
   let response = {};
-  // To-Do change to partitioned table.. (It might not take so long after all and I want to do it because I now know how..)
   let queries = {
     yarnQuery: "SELECT * FROM \"Yarn_partitions\"",
     knittingNeedleQuery: 'SELECT * FROM \"KnittingNeedle\"',

@@ -25,7 +25,6 @@ let selectedCountry = "";
 
 let viewCleared = false;
 
-//MVP version (This prints the data from db once, but maybe it needs to be dynamic so it would be more useful..)
 finlandBtn.addEventListener("click", () => {
     console.log("Loading product catalog for Finland..");
     selectedCountry = "Finland";
