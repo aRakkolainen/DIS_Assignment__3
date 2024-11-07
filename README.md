@@ -24,7 +24,7 @@ npm start
 Go to address localhost:3001 and the app should be running there
 
 Demonstration video: 
-Link will be included here later
+Link to demovideo: https://lut-my.sharepoint.com/:v:/g/personal/aino_rakkolainen_student_lut_fi/ESRsbb9R9c5Nv9FFioCZAJEBu18AN2n_hXk2iwRZ3BUYvA?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=ZWsErK 
 
 Learning goals with this project: 
 - Practice how to implement a platform that uses multiple databases in its SQL queries.
