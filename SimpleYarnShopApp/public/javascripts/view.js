@@ -1,7 +1,10 @@
 
-let finlandBtn = document.getElementById("finlandBtn");
-let ukBtn = document.getElementById("ukBtn");
-let italyBtn = document.getElementById("italyBtn");
+const finlandBtn = document.getElementById("finlandBtn");
+const ukBtn = document.getElementById("ukBtn");
+const italyBtn = document.getElementById("italyBtn");
+const filterBtn = document.getElementById("filterBtn");
+const showAllBtn = document.getElementById("showAllBtn");
+
 let finnishProducts = [];
 let britishProducts = [];
 let italianProducts = [];
@@ -17,14 +20,16 @@ let patternHeaders = document.getElementById("patternHeaders");
 let hookHeaders = document.getElementById("hookHeaders");
 let needleHeaders = document.getElementById("needleHeaders");
 
-let selectedCountry = document.getElementById("selectedCountry");
+let selectedCountryTextBox = document.getElementById("selectedCountry");
+let selectedCountry = "";
 
 let viewCleared = false;
 
 //MVP version (This prints the data from db once, but maybe it needs to be dynamic so it would be more useful..)
 finlandBtn.addEventListener("click", () => {
     console.log("Loading product catalog for Finland..");
-    selectedCountry.innerText = 'Showing product catalog for Finland';
+    selectedCountry = "Finland";
+    selectedCountryTextBox.innerText = 'Showing product catalog for ' + selectedCountry;
     let url = "http://localhost:3001/finnishProducts";
     setProductCatalogVisible();
     
@@ -38,7 +43,8 @@ finlandBtn.addEventListener("click", () => {
         
 ukBtn.addEventListener("click", async () => {
     console.log("Loading product catalog for UK..");
-    selectedCountry.innerText = 'Showing product catalog for UK';
+    selectedCountryTextBox.innerText = 'Showing product catalog for UK';
+    selectedCountry = "UK";
     let url = "http://localhost:3001/britishProducts";
     setProductCatalogVisible();
     clearProductCatalogView();
@@ -50,7 +56,8 @@ ukBtn.addEventListener("click", async () => {
         
 italyBtn.addEventListener("click", async () => {
     console.log("Loading product catalog for Italy..");
-    selectedCountry.innerText = 'Showing product catalog for Italy';
+    selectedCountryTextBox.innerText = 'Showing product catalog for Italy';
+    selectedCountry = "Italy";
     let url = "http://localhost:3001/italianProducts";
     setProductCatalogVisible();
     clearProductCatalogView();
@@ -60,7 +67,40 @@ italyBtn.addEventListener("click", async () => {
     }
 
     });
- 
+ //Source: https://stackoverflow.com/questions/6912584/how-to-get-get-query-string-variables-in-express-js-on-node-js
+filterBtn.addEventListener("click", async () => {
+    let url = "http://localhost:3001/filteredYarns";
+    let result = await fetch(url, {
+        method: 'POST',
+        headers: {
+            "Content-type": "application/json"
+            }, 
+        body: '{"selectedCountry": "' + selectedCountry + '"}'
+    });
+    let yarnsList = await result.json(); 
+    console.log(yarnsList);
+    let yarnID = "yarn#";
+    clearTable(yarnsTableBody, yarnID);
+    fillYarnsTable(yarnsList.yarns);
+
+})
+
+showAllBtn.addEventListener("click", async () => {
+    let url = "http://localhost:3001/showAllYarns";
+    let result = await fetch(url, {
+        method: 'POST',
+        headers: {
+            "Content-type": "application/json"
+            }, 
+        body: '{"selectedCountry": "' + selectedCountry + '"}'
+    });
+    let yarnsList = await result.json(); 
+
+    
+    let yarnID = "yarn#";
+    clearTable(yarnsTableBody, yarnID);
+    fillYarnsTable(yarnsList.yarns); 
+})
 
 
 function setProductCatalogVisible() {
@@ -70,16 +110,15 @@ function setProductCatalogVisible() {
 async function fetchDataAndFillProductCatalogView(url) {
     let result = await fetch(url);
     let productCatalog = await result.json(); 
-
-    let yarns = productCatalog.yarns; 
-    let patterns = productCatalog.patterns; 
-    let needles = productCatalog.needles; 
-    let hooks = productCatalog.hooks; 
-    console.log("Product catalog: ", productCatalog); 
-    fillYarnsTable(yarns);
-    fillPatternsTable(patterns);
-    fillHooksTable(hooks);
-    fillNeedlesTable(needles);
+        let yarns = productCatalog.yarns; 
+        let patterns = productCatalog.patterns; 
+        let needles = productCatalog.needles; 
+        let hooks = productCatalog.hooks; 
+        console.log("Product catalog: ", productCatalog); 
+        fillYarnsTable(yarns);
+        fillPatternsTable(patterns);
+        fillHooksTable(hooks);
+        fillNeedlesTable(needles);
 }
 
 function fillYarnsTable(yarns) {

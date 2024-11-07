@@ -53,6 +53,17 @@ button#ukBtn {
 button#italyBtn {
   background-color: #9c27b0;
 }
+button#filterBtn {
+  background-color: #9c27b0;
+}
+
+button#showAllBtn {
+  background-color: #9c27b0;
+}
+
+div#filteringDiv{
+  padding-bottom:2%;
+}
 
 th{
   color:#7b1fa2 ;
