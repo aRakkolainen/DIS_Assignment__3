@@ -22,6 +22,7 @@ cd SimpleYarnShopApp
 npm install (this command installs the needed dependencies) 
 
 npm start
+
 Go to address localhost:3001 and the app should be running there
 
 ## Demonstration video
