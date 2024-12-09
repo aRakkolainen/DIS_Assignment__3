@@ -1,10 +1,11 @@
-Project name: Simple Yarn Shop Application
+## Project name 
+Simple Yarn Shop Application
 
-Description:
+## Description
 This repository includes the source code for assignment 3 in the course Data-Intensive Systems and this will eventually include a short video where I demonstrate the app.
 This assignment is about a simple website for searching yarn and other knitting related products online and the products are fetched from three imaginery databases located in Finland, UK and Italy. It mimics online shopping platforms only in data, the format itself is simple to just show data items in a table format. 
 
-How to run the project: 
+## How to run the project 
 1. Setting up the database:  
 
 Create Postgresql server in Pg Admin 4 and create three databases: FinlandDB, ItalyDB and UnitedKingdomDB.  
@@ -23,12 +24,12 @@ npm install (this command installs the needed dependencies)
 npm start
 Go to address localhost:3001 and the app should be running there
 
-Demonstration video: 
+## Demonstration video
 Link to demovideo: https://lut-my.sharepoint.com/:v:/g/personal/aino_rakkolainen_student_lut_fi/ESRsbb9R9c5Nv9FFioCZAJEBu18AN2n_hXk2iwRZ3BUYvA?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=ZWsErK 
 
-Learning goals with this project: 
+## Learning goals with this project
 - Practice how to implement a platform that uses multiple databases in its SQL queries.
 - Revise my knowledge about JavaScript and Postgresql and practise using pg admin for partitioning
 
-Project status:
+## Project status
   The current version meets the requirements of the given assignment but it could be made more realistic e-shopping platform and developed further at some point. 
